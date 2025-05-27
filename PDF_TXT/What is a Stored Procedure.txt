@@ -1,0 +1,162 @@
+What is a Stored Procedure?
+A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+So if you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it.
+You can also pass parameters to a stored procedure, so that the stored procedure can act based on the parameter value(s) that is passed.
+
+------
+
+A stored procedure is simply a saved set of instructions, written in SQL language. This means that instead of having to rewrite the same code each time you want it to run, you can save it as a ‘stored procedure’ and just call on this instruction whenever needed. You can also add parameters that customize how the query works based on what value(s) are passed into them.
+
+In other words, a stored procedure is a group of one or more pre-programmed SQL statements saved in the database. It has a name, input parameters, and Transact-SQL code that performs some kind of action. When it’s called for the first time, an execution plan is created by the Database Server which stores them in memory so they can be reused quickly when needed again later on. 
+
+----
+An SQL Server Stored Procedure is a logical collection of statements or queries packaged together to perform a particular task, repeatedly.
+---------------
+A Stored Procedure is a type of code in SQL that can be stored for later use and can be used many times. So, whenever you need to execute the query, instead of calling it you can just call the stored procedure. You can also pass parameters to a stored procedure, so that the stored procedure can act based on the parameter values that is passed.
+-------------------
+
+Types of SQL Stored Procedures
+
+1. System Stored Procedures
+User-defined stored procedures can be tailored to a business's needs, such as calculating totals, processing orders, or generating reports. For example, creating a procedure that calculates the total sales for a particular product category.
+
+2. User-Defined Stored Procedures (UDPs)
+
+
+3. Extended Stored Procedures
+
+
+4. CLR Stored Procedures
+
+----
+
+Advantages :
+The main advantages of stored procedure are given below:
+
+1.Better Performance - The procedure calls are quick and efficient as stored procedures are compiled once and stored in executable form. Hence the response is quick. The executable code is automatically cached, hence lowers the memory requirements.
+
+2.Higher Productivity - Stored Procedure helps to encapsulate the SQL logic and business logic due to which it provide reusability and modularity.
+
+3. Ease of Use - To create a stored procedure, one can use any Java Integrated Development Environment (IDE). Then, they can be deployed on any tier of network architecture.
+
+4.Scalability - Stored procedures increase scalability by isolating application processing on the server.
+
+5.Maintainability - Maintaining a procedure on a server is much easier then maintaining copies on various client machines, this is because scripts are in one location.
+
+6.Security - Access to the Oracle data can be restricted by allowing users to manipulate the data only through stored procedures that execute with their definer's privileges.
+
+
+Disadvantages :
+
+The main disadvantages of stored procedures are given below:
+
+1.Testing - Testing of a logic which is encapsulated inside a stored procedure is very difficult. Any data errors in handling stored procedures are not generated until runtime.
+
+2.Debugging - Depending on the database technology, debugging stored procedures will either be very difficult or not possible at all. Some relational databases such as SQL Server have some debugging capabilities.
+
+3.Versioning - Version control is not supported by the stored procedure.
+
+4.Cost - An extra developer in the form of DBA is required to access the SQL and write a better stored procedure. This will automatically incur added cost.
+
+5.Portability - Complex stored procedures will not always port to upgraded versions of the same database. This is specially true in case of moving from one database type(Oracle) to another database type(MS SQL Server).
+
+------------
+
+https://www.datacamp.com/tutorial/sql-stored-procedure
+
+Common Uses for Stored Procedures
+
+1- Data validation and integrity enforcement
+Stored procedures can be used to validate data before update or insertion. In the example below, a stored procedure checks that a customer’s email is unique before inserting a new record into the Customers table, ensuring data consistency. This centralizes validation logic within the database, reducing redundancy and ensuring uniform enforcement across different applications.
+
+-- code -- 
+-- Create a procedure to add a new customer, checking for duplicate email
+CREATE PROCEDURE AddCustomer
+    @CustomerName VARCHAR(50), 
+    @CustomerEmail VARCHAR(50)
+AS
+BEGIN
+    -- Check if the email already exists in the Customers table
+    IF EXISTS (SELECT 1 FROM Customers WHERE Email = @CustomerEmail)
+        -- Throw an error if the email is already in use
+        THROW 50000, 'Email already exists.', 1;
+    ELSE
+        -- Insert new customer details if email is unique
+        INSERT INTO Customers (Name, Email) VALUES (@CustomerName, @CustomerEmail);
+END;
+--
+2- Transaction management
+By using stored procedures, you can ensure multiple operations are executed as a single transaction. For example, in a banking system, a stored procedure can handle both debit and credit actions in a funds transfer, making sure both actions succeed or fail together.
+
+-- Code --
+-- Create a procedure to transfer funds between accounts
+CREATE PROCEDURE TransferFunds
+    @SenderAccount INT,
+    @ReceiverAccount INT,
+    @Amount DECIMAL(10, 2)
+AS
+BEGIN
+    BEGIN TRANSACTION;  -- Start a transaction to ensure atomicity
+    -- Deduct the specified amount from the sender's account balance
+    UPDATE Accounts SET Balance = Balance - @Amount WHERE AccountID = @SenderAccount;
+    -- Add the specified amount to the receiver's account balance
+    UPDATE Accounts SET Balance = Balance + @Amount WHERE AccountID = @ReceiverAccount;
+    -- Check for errors and rollback if any occurred; otherwise, commit the transaction
+    IF @@ERROR <> 0
+        ROLLBACK TRANSACTION;  -- Undo all changes if an error occurred
+    ELSE
+        COMMIT TRANSACTION;    -- Confirm changes if no errors
+END;
+
+---
+
+--------
+Best Practices for Stored Procedures
+Writing efficient and maintainable stored procedures ensures your database performs optimally. The following are the tips for writing stored procedures for your SQL databases.
+
+ - Use Consistent Naming Conventions: To make stored procedures easy to identify and understand, use a consistent and descriptive naming format. Also, avoid the sp_ Prefix in SQL Server reserved for system procedures to prevent potential conflicts and performance issues.
+
+ - Implement Error Handling: Wrap SQL statements in TRY...CATCH blocks to catch and handle errors and maintain data integrity. 
+
+ - Optimize for Performance: Minimize the use of cursors as they can be slow and resource-intensive. Instead, try using set-based operations, which are generally more efficient. Also, index the frequently used columns and avoid complex joins in large tables to reduce memory overhead and improve efficiency.
+
+ - Parameterize Stored Procedures: Use parameters instead of hardcoded values to allow you to pass dynamic values into your procedure, making it more flexible and reusable.
+
+-----------------------
+
+Stored Procedure Example
+
+
+creates a stored procedure
+
+CREATE PROCEDURE SelectAllCustomers
+AS
+SELECT * FROM Customers
+GO;
+
+Execute the stored procedure 
+
+EXEC SelectAllCustomers;
+---
+
+Stored Procedure With One Parameter
+
+Example
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30)
+AS
+SELECT * FROM Customers WHERE City = @City
+GO;
+
+EXEC SelectAllCustomers @City = 'London';
+
+----
+
+Stored Procedure With Multiple Parameters
+
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30), @PostalCode nvarchar(10)
+AS
+SELECT * FROM Customers WHERE City = @City AND PostalCode = @PostalCode
+GO;
+
+EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
+
