@@ -14,7 +14,7 @@ Stored procedures support input parameters, allow encapsulation of logic, and ca
 
 - Stored procedures are compiled once and stored as executable plans.
 - On subsequent calls, the database reuses the compiled plan, speeding up execution.
-- 
+
 **2. Reduced Network Traffic:**
 
 - Since stored procedures encapsulate multiple SQL statements, only the procedure call is sent over the network, not each individual SQL statement.
@@ -100,3 +100,76 @@ These are SQL Server-based stored procedures that are written in.NET languages,
 such as C#. When complex functionality is required that is difficult to implement with 
 T-SQL alone, such as interacting with external APIs or complex string manipulation, 
 CLR stored procedures can be helpful
+
+## Stored Procedure Syntax
+
+1. Simple Stored Procedure Syntax:
+
+```sql
+--1. Create a Simple Stored Procedure:
+CREATE PROCEDURE procedure_name
+AS
+BEGIN
+   --sql_statement
+END;
+
+--2.  Execute a Simple Stored Procedure:
+EXEC procedure_name;
+
+--3. Example:
+
+CREATE PROCEDURE SelectAllCustomers
+AS
+BEGIN
+SELECT * FROM Customers
+END;
+
+EXEC SelectAllCustomers;
+
+```
+
+2. Stored Procedure With One Parameter:
+
+```sql
+--1. Create Stored Procedure With One Parameter:
+
+CREATE PROCEDURE procedure_name @Parameter_name datatype
+AS
+BEGIN
+--sql_statement with  @Parameter_name
+END;
+
+--2. Execute Stored Procedure With One Parameter:
+EXEC procedure_name @Parameter_name;
+
+--3. Example
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30)
+AS
+BEGIN
+SELECT * FROM Customers WHERE City = @City
+END;
+EXEC SelectAllCustomers @City = 'London';
+
+```
+
+3. Stored Procedure With Multiple Parameters:
+```sql
+--1. Create Stored Procedure With Multiple Parameters:
+CREATE PROCEDURE procedure_name @Parameter_name1 datatype , @Parameter_name2 datatype
+AS
+BEGIN
+--sql_statement with  @Parameter_name1 ,@Parameter_name2
+END;
+
+--2. Execute Stored Procedure With Multiple Parameters:
+EXEC procedure_name @Parameter_name1, @Parameter_name2;
+
+--3. Example
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30), @PostalCode nvarchar(10)
+AS
+BEGIN
+SELECT * FROM Customers WHERE City = @City AND PostalCode = @PostalCode
+END;
+EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
+
+```
