@@ -173,3 +173,6 @@ END;
 EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
 
 ```
+## Apply Stored Procedure in Practice 
+
+
