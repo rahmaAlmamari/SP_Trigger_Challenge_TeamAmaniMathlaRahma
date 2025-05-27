@@ -198,3 +198,19 @@ CREATE TABLE Employees (
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 ```
+
+3. Insert data into the tables:
+```sql
+-- Insert sample data into Departments
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(101, 'Human Resources'),
+(102, 'Finance'),
+(103, 'Engineering');
+-- Insert sample data into Employees
+INSERT INTO Employees (Name, Salary, DepartmentID) VALUES
+('Alice', 5000.00, 101),
+('Bob', 6000.00, 101),
+('Carol', 7000.00, 102),
+('David', 5500.00, 103),
+('Eva', 7200.00, 101);
+```
