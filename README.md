@@ -199,8 +199,6 @@ CREATE TABLE Employees (
 );
 ```
 
-![Table Data](./images/TableData.png)
-
 3. Insert data into the tables:
 ```sql
 -- Insert sample data into Departments
@@ -216,6 +214,7 @@ INSERT INTO Employees (Name, Salary, DepartmentID) VALUES
 ('David', 5500.00, 103),
 ('Eva', 7200.00, 101);
 ```
+![Table Data](./images/TableData.png)
 
 4. Create a simple stored procedure to retrieve all employees by department:
 ```sql
