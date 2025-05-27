@@ -246,6 +246,7 @@ END;
 -- How to Execute It
 EXEC GetEmployeesByDepartment @DepartmentID = 101;
 ```
+![Procedure With One Parameter](./images/ProcedurewithOneParameter.png)
 
 6. Create a stored procedure with multiple parameters to calculate total salary by department:
 ```sql
