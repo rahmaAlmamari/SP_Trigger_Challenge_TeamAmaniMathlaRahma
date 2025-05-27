@@ -93,3 +93,10 @@ These procedures are DLLs that an instance of SQL Server can dynamically load an
 
 **~~NOTE:~~ Extended stored procedures will be removed in a future version of SQL Server. 
 Don't use this feature in new development work.**
+
+**5. Stored Procedures in CLR:**
+
+These are SQL Server-based stored procedures that are written in.NET languages, 
+such as C#. When complex functionality is required that is difficult to implement with 
+T-SQL alone, such as interacting with external APIs or complex string manipulation, 
+CLR stored procedures can be helpful
