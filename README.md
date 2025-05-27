@@ -38,28 +38,18 @@ Stored procedures support input parameters, allow encapsulation of logic, and ca
 - Procedures let you abstract complex SQL logic away from client applications.
 - Parameters can be used for dynamic input.
 
-## Disadvantages of using stored procedures?
-**1. Increased Overhead:**
+## Drawbacks of Stored Procedures?
+**1. Debugging Difficulty:** Debugging can be more complex compared to regular SQL.
 
-Stored procedures can consume more server resources than simple SQL statements, 
-particularly when they are used frequently or for complex operations.
+**2. Versioning:** Harder to manage versions compared to application code.
 
-**2. Limited Portability:**
+**3. Portability:** Procedures are often tied to a specific DBMS (e.g., SQL Server vs Oracle).
 
-Stored procedures are often specific to a particular database management system (DBMS), 
-which means they may not be easily portable to other DBMSs.
+**4. Testing Complexity:** Errors may only surface at runtime.
 
-**3. Debugging Challenges:**
+**5. Resource Overhead:** Complex or overused procedures can consume server resources.
 
-Debugging stored procedures can be more challenging than debugging simple SQL statements, 
-due to the complexity of their execution environment and the potential for interactions 
-with other stored procedures or database objects.
-
-**4. Security Risks:**
-
-If stored procedures are not written correctly, they can pose a security risk, 
-particularly if they are used to access sensitive data or to perform actions 
-that could compromise the integrity of the database.
+**6. Developer Costs:** Writing efficient procedures may require skilled DBAs or SQL developers.
 
 ## Types of stored procedures?
 **1. User-defined:**
