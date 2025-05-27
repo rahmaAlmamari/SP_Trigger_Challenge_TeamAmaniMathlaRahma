@@ -61,3 +61,26 @@ process the procedure.If there are significant changes to the tables or data
 referenced by the procedure, the precompiled plan might actually cause the 
 procedure to perform slower. In this case, recompiling the procedure and forcing 
 a new execution plan can improve performance.
+
+## Disadvantages of using stored procedures?
+**1. Increased Overhead:**
+
+Stored procedures can consume more server resources than simple SQL statements, 
+particularly when they are used frequently or for complex operations.
+
+**2. Limited Portability:**
+
+Stored procedures are often specific to a particular database management system (DBMS), 
+which means they may not be easily portable to other DBMSs.
+
+**3. Debugging Challenges:**
+
+Debugging stored procedures can be more challenging than debugging simple SQL statements, 
+due to the complexity of their execution environment and the potential for interactions 
+with other stored procedures or database objects.
+
+**4. Security Risks:**
+
+If stored procedures are not written correctly, they can pose a security risk, 
+particularly if they are used to access sensitive data or to perform actions 
+that could compromise the integrity of the database.
