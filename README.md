@@ -271,3 +271,4 @@ EXEC CalculateTotalSalaryByDepartment
 -- Display the result
 SELECT @Result AS TotalSalary;
 ```
+![Procedure With Two Parameter](./images/ProcedurewithTwoParameter.png)
