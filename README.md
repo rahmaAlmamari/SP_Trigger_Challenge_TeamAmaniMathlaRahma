@@ -175,4 +175,9 @@ EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
 ```
 ## Apply Stored Procedure in Practice 
 
-
+1. Create a real-life case database (Company):
+```sql
+-- Cerate and use the database
+create database TeamworkDB
+use TeamworkDB
+```
