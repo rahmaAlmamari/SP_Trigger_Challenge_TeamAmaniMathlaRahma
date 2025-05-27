@@ -199,6 +199,8 @@ CREATE TABLE Employees (
 );
 ```
 
+![Table Data](./images/TableData.png)
+
 3. Insert data into the tables:
 ```sql
 -- Insert sample data into Departments
