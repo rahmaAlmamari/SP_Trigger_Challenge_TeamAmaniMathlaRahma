@@ -229,6 +229,7 @@ END;
 -- How to Execute It
 EXEC GetAllEmployees;
 ```
+![Procedure Without Parameter](./images/ProcedureWithoutParameter.png)
 
 5. Create a stored procedure with parameter to retrieve all employees by specific department id:
 ```sql
