@@ -214,3 +214,17 @@ INSERT INTO Employees (Name, Salary, DepartmentID) VALUES
 ('David', 5500.00, 103),
 ('Eva', 7200.00, 101);
 ```
+
+4. Create a simple stored procedure to retrieve all employees by department:
+```sql
+--  Procedure WITHOUT Parameters
+CREATE PROCEDURE GetAllEmployees
+AS
+BEGIN
+    SELECT e.EmployeeID, e.Name, e.Salary, d.DepartmentName
+    FROM Employees e
+    INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+END;
+-- How to Execute It
+EXEC GetAllEmployees;
+```
