@@ -228,3 +228,19 @@ END;
 -- How to Execute It
 EXEC GetAllEmployees;
 ```
+
+5. Create a stored procedure with parameter to retrieve all employees by specific department id:
+```sql
+--  Procedure with One Parameter
+CREATE PROCEDURE GetEmployeesByDepartment
+    @DepartmentID INT
+AS
+BEGIN
+    SELECT e.EmployeeID, e.Name, e.Salary, d.DepartmentName
+    FROM Employees e
+    INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID
+    WHERE e.DepartmentID = @DepartmentID;
+END;
+-- How to Execute It
+EXEC GetEmployeesByDepartment @DepartmentID = 101;
+```
