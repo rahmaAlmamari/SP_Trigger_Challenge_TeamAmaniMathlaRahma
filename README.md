@@ -525,17 +525,17 @@ END;
 
 ### Apply Triggers in Practice 
 
-1. Create a real-life case database (Company):
+**1. Create a real-life case database (Company):**
 ```sql
 -- Create database
 Create database TriggerDB
 -- USE Database
 USE TriggerDB
 ```
-2. DDL Trigger: CREATE, ALTER, DROP TABLE:
-```sql
--- Step 1: Create a log table
+**2. DDL Trigger: CREATE, ALTER, DROP TABLE:**
 
+- Step 1: Create a log table
+```SQL
 CREATE TABLE ddl_log (
     EventType      NVARCHAR(100),
     ObjectName     NVARCHAR(256),
@@ -543,9 +543,10 @@ CREATE TABLE ddl_log (
     EventTime      DATETIME DEFAULT GETDATE(),
     LoginName      NVARCHAR(100)
 );
+```
 
--- Step 2: Create the DDL trigger
-
+- Step 2: Create the DDL trigger
+```SQL
 CREATE TRIGGER trg_ddl_table_events
 ON DATABASE
 FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
@@ -561,9 +562,10 @@ BEGIN
         @EventData.value('(/EVENT_INSTANCE/LoginName)[1]', 'NVARCHAR(100)')
     );
 END;
+```
 
--- Step 3: Create a table to track employee activity
-
+- Step 3: Create a table to track employee activity
+```SQL
 CREATE TABLE employees (
     emp_id INT PRIMARY KEY,
     name NVARCHAR(100),
@@ -572,12 +574,18 @@ CREATE TABLE employees (
 );
 
 INSERT INTO employees VALUES (1, 'Alice', 'Manager', 7000.00);
+```
 
--- Step 4: Check Execution of DDL Trigger
-
+- Step 4: Check Execution of DDL Trigger
+```SQL
 select * from ddl_log;
 ```
+
 ![DDL Trigger Flow](./images/CheckExecutionOfDDLTrigger.png)
+
+**3. DML Trigger: INSERT, UPDATE, DELETE:**
+
+
 
 
 
