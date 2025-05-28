@@ -523,6 +523,7 @@ BEGIN
 END;
 ```
 
+### Apply Triggers in Practice 
 
 
 
