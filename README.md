@@ -1,6 +1,8 @@
-# **Stored Procedure** 
+# **Mastering Stored Procedures & Triggers**
 
-## What is a Stored Procedure?
+## **Stored Procedure** 
+
+### What is a Stored Procedure?
 A stored procedure is a precompiled collection of one or more SQL statements stored 
 in the database. It can be executed multiple times with different parameters, 
 allowing for efficient reuse of logic, reduced duplication, and better performance.
@@ -8,7 +10,7 @@ Stored procedures support input parameters, allow encapsulation of logic, and ca
 
 ![Stored Procedure](./images/StoredProcedures.png)
 
-## Benefits of Stored Procedures?
+### Benefits of Stored Procedures?
 
 **1. Performance Optimization:**
 
@@ -38,7 +40,7 @@ Stored procedures support input parameters, allow encapsulation of logic, and ca
 - Procedures let you abstract complex SQL logic away from client applications.
 - Parameters can be used for dynamic input.
 
-## Drawbacks of Stored Procedures?
+### Drawbacks of Stored Procedures?
 **1. Debugging Difficulty:** Debugging can be more complex compared to regular SQL.
 
 **2. Versioning:** Harder to manage versions compared to application code.
@@ -51,7 +53,7 @@ Stored procedures support input parameters, allow encapsulation of logic, and ca
 
 **6. Developer Costs:** Writing efficient procedures may require skilled DBAs or SQL developers.
 
-## Types of stored procedures?
+### Types of stored procedures?
 **1. User-defined:**
 
 A user-defined procedure can be created in a user-defined database or in all system 
@@ -101,7 +103,7 @@ such as C#. When complex functionality is required that is difficult to implemen
 T-SQL alone, such as interacting with external APIs or complex string manipulation, 
 CLR stored procedures can be helpful
 
-## Stored Procedure Syntax
+### Stored Procedure Syntax
 
 1. Simple Stored Procedure Syntax:
 
@@ -173,7 +175,7 @@ END;
 EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
 
 ```
-## Apply Stored Procedure in Practice 
+### Apply Stored Procedure in Practice 
 
 1. Create a real-life case database (Company):
 ```sql
@@ -272,3 +274,14 @@ EXEC CalculateTotalSalaryByDepartment
 SELECT @Result AS TotalSalary;
 ```
 ![Procedure With Two Parameter](./images/ProcedurewithTwoParameter.png)
+
+## **Triggers** 
+
+### What is SQL Triggers?
+A trigger is a stored procedure in a database that automatically invokes whenever 
+a special event in the database occurs. By using SQL triggers, developers can automate 
+tasks, ensure data consistency, and keep accurate records of database activities. 
+For example, a trigger can be invoked when a row is inserted into a specified table or 
+when specific table columns are updated.
+
+
