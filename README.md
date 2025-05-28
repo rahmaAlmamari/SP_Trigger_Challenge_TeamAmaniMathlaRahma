@@ -308,19 +308,31 @@ deployment.
 The EVENTDATA() is an inbuilt function of the DDL trigger in SQL Server and 
 that would return exchange occasion subtleties with the number of the fields in XML format
 
-EventType (Create View, Alter View, Drop View, etc…)
-PostTime (Event trigger time)
-SPID (SQL Server session ID)
-ServerName (SQL Server instance name)
-LoginName (SQL Server Login name)
-UserName (username for login, by default dbo schema as username)
-DatabaseName (name of database where trigger was executed)
-SchemaName (schema name of the View)
-ObjectName (Name of the View)
-ObjectType (Object types. such as Table, view, procedure, etc…)
-TSQLCommand (Schema deployment Query which is executed by user)
-SetOptions (SET Option which are applied while Creating View or Modify it)
-CommandText (Create, Alter or Drop object command)
+- EventType (Create View, Alter View, Drop View, etc…).
+- PostTime (Event trigger time).
+- SPID (SQL Server session ID).
+- ServerName (SQL Server instance name).
+- LoginName (SQL Server Login name).
+- UserName (username for login, by default dbo schema as username).
+- DatabaseName (name of database where trigger was executed).
+- SchemaName (schema name of the View).
+- ObjectName (Name of the View).
+- ObjectType (Object types. such as Table, view, procedure, etc…).
+- TSQLCommand (Schema deployment Query which is executed by user).
+- SetOptions (SET Option which are applied while Creating View or Modify it).
+- CommandText (Create, Alter or Drop object command).
+
+__Example: Prevent Table Deletions__
+```sql 
+CREATE TRIGGER prevent_table_creation
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+AS 
+BEGIN
+   PRINT 'you can not create, drop and alter table in this database';
+   ROLLBACK;
+END;
+```
 
 
 
