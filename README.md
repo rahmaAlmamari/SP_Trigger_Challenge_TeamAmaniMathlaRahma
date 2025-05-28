@@ -389,6 +389,18 @@ user session is not established. User connection also fails in
 case of the error having severity more significant than 20 inside 
 the trigger.
 
+__Example: Track User Logins__
+```sql
+CREATE TRIGGER track_logon
+ON LOGON
+AS
+BEGIN
+   PRINT 'A new user has logged in.';
+END;
+```
+
+
+
 
 
 
