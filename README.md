@@ -727,6 +727,13 @@ SELECT * FROM login_log ORDER BY LoginTime DESC;
 
 ![LOGON Trigger Flow](./images/logon_toDisplay.png)
 
+## **References** 
+
+1. SQL Stored Procedures for SQL Server/www.w3schools.com/https://www.w3schools.com/sql/sql_stored_procedures.asp
+2. SQL - Stored Procedures/www.tutorialspoint.com/https://www.tutorialspoint.com/sql/sql-stored-procedures.htm
+3. Stored procedures (Database Engine)/www.microsoft.com/https://learn.microsoft.com/en-us/sql/relational-databases/stored-procedures/stored-procedures-database-engine?view=sql-server-ver17
+4. Understanding Stored Procedures in SQL: Benefits & Creation!/www.simplilearn.com/https://www.simplilearn.com/tutorials/sql-tutorial/stored-procedure-in-sql
+
 
 
 
