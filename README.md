@@ -415,7 +415,25 @@ the database constraints defined on the tables on which the trigger is defined.
 For example, suppose if have a situation that there is an online learning system 
 in which a user can register in the multiple course.
 
+### Drawbacks of Trigger?
 
+1. CREATE TRIGGER must be the first statement in the batch and can apply to 
+only one table.
+
+2. A trigger is created only in the current database; however, a trigger can 
+reference objects outside the current database.
+
+3. If the trigger schema name is specified to qualify the trigger, qualify the 
+table name in the same way.
+
+4. The same trigger action can be defined for more than one user action 
+(for example, INSERT and UPDATE) in the same CREATE TRIGGER statement.
+
+5. INSTEAD OF DELETE/UPDATE triggers can't be defined on a table that has a 
+foreign key with a cascade on DELETE/UPDATE action defined.
+
+6. Any SET statement can be specified inside a trigger. The SET option selected 
+remains in effect during the execution of the trigger and then reverts to its former setting.
 
 
 
