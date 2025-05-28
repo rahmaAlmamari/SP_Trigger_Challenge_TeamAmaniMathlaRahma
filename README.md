@@ -398,6 +398,23 @@ BEGIN
    PRINT 'A new user has logged in.';
 END;
 ```
+### Benefits of Trigger?
+
+1. It helps in maintaining the integrity constraints in the database tables, 
+especially when the primary key and foreign key constrain are not defined.
+
+2. It sometimes also helps in keeping the SQL codes short and simple as I 
+show in the real-life example.
+
+3. It helps in maintaining the track of all the changes (update, deletion and 
+insertion) occurs in the tables through inserting the changes values in the 
+audits tables.
+
+4. Sometimes if the code is not well managed, then it can help in maintaining 
+the database constraints defined on the tables on which the trigger is defined. 
+For example, suppose if have a situation that there is an online learning system 
+in which a user can register in the multiple course.
+
 
 
 
