@@ -671,9 +671,61 @@ select * from dml_log;
 
 ![DML - Delete Trigger Flow](./images/dml_delete.png)
 
+**4. Logon Trigger (on SQL Server Instance):**
 
+- Step 1: Create a server-level log table
+```sql
+USE master;
+GO
+CREATE TABLE login_log (
+    LoginTime   DATETIME DEFAULT GETDATE(),
+    LoginName   NVARCHAR(100),
+    HostName    NVARCHAR(100),
+    AppName     NVARCHAR(100)
+);
+```
 
+- Step 2: Create the logon trigger
+```sql
+CREATE TRIGGER trg_logon
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    INSERT INTO master.dbo.login_log (LoginName, HostName, AppName)
+    VALUES (
+        ORIGINAL_LOGIN(),
+        HOST_NAME(),
+        APP_NAME()
+    );
+END;
+```
 
+- Step 3: Check Execution of LOGON Trigger
+~~NOTE:~~
+to check if the trigger enable or not
+
+```SQL
+SELECT name, is_disabled
+FROM sys.server_triggers
+WHERE name = 'trg_logon';
+```
+
+- makeing the trigger enable
+```SQL
+ENABLE TRIGGER trg_logon ON ALL SERVER;
+```
+
+![LOGON Trigger Flow](./images/logon_toCheck.png)
+
+- to display trg_logon
+```SQL
+USE master;
+GO
+SELECT * FROM login_log ORDER BY LoginTime DESC;
+```
+
+![LOGON Trigger Flow](./images/logon_toDisplay.png)
 
 
 
