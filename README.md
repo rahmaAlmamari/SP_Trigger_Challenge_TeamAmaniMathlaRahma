@@ -435,7 +435,53 @@ foreign key with a cascade on DELETE/UPDATE action defined.
 6. Any SET statement can be specified inside a trigger. The SET option selected 
 remains in effect during the execution of the trigger and then reverts to its former setting.
 
+### Real-World Use Cases of SQL Triggers
 
+**1. Automatically Updating Related Tables (DML Trigger Example):**
+
+- case :
+Triggers can automatically perform tasks, like updating related tables when data 
+changes. Imagine we have a database for students, where the student_grades table 
+holds individual subject grades. If the grade of a student is updated, we may 
+also need to update the total_scores table.
+
+- code :
+```sql
+CREATE TRIGGER update_student_score
+AFTER UPDATE ON student_grades
+FOR EACH ROW
+BEGIN
+   UPDATE total_scores
+   SET score = score + :new.grade
+   WHERE student_id = :new.student_id;
+END;
+```
+
+This ensures that every time a student's grade is updated, the total score 
+in the total_scores table is automatically recalculated.
+
+**2. Data Validation (Before Insert Trigger Example):**
+
+- case :
+Triggers can be used to validate data before it is inserted into a table, 
+ensuring that the data follows specific business rules. For instance, 
+we may want to ensure that the grades being inserted are within a valid 
+range (say 0 to 100).
+
+- code :
+```sql
+CREATE TRIGGER validate_grade
+BEFORE INSERT ON student_grades
+FOR EACH ROW
+BEGIN
+   IF :new.grade < 0 OR :new.grade > 100 THEN
+      RAISE_APPLICATION_ERROR(-20001, 'Invalid grade value.');
+   END IF;
+END;
+```
+
+The trigger checks if the inserted grade is valid. If not, it throws an error 
+and prevents the insertion.
 
 
 
