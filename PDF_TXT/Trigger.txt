@@ -1,0 +1,68 @@
+- What is a Trigger? 
+
+A trigger is a special type of stored procedure that automatically runs when an event occurs in the database server. You can create triggers directly from Transact-SQL statements or from methods of assemblies that are created in the Microsoft .NET Framework common language runtime (CLR) and uploaded to an instance of SQL Server. SQL Server lets you create multiple triggers for any specific statement.
+
+- Types of Triggers?
+
+1. DML triggers: 
+Run when a user tries to modify data through a data manipulation language (DML) event. DML events are INSERT, UPDATE, or DELETE statements on a table or view. These triggers fire when any valid event fires, whether table rows are affected or not.
+
+Transact-SQL statements aren't allowed in a DML trigger:
+1. ALTER DATABASE
+2. CREATE DATABASE
+3. DROP DATABASE
+4. RESTORE DATABASE
+5. RESTORE LOG
+6. RECONFIGURE
+
+2. DDL triggers:
+Run in response to a variety of data definition language (DDL) events. These events primarily correspond to Transact-SQL CREATE, ALTER, and DROP statements, and certain system stored procedures that perform DDL-like operations.
+
+3. Logon triggers:
+Run as response to the LOGON event that's raised when a user's session is being established.
+
+- Trigger Limitations?
+
+1. CREATE TRIGGER must be the first statement in the batch and can apply to only one table.
+2. A trigger is created only in the current database; however, a trigger can reference objects outside the current database.
+3. If the trigger schema name is specified to qualify the trigger, qualify the table name in the same way.
+4. The same trigger action can be defined for more than one user action (for example, INSERT and UPDATE) in the same CREATE TRIGGER statement.
+5. INSTEAD OF DELETE/UPDATE triggers can't be defined on a table that has a foreign key with a cascade on DELETE/UPDATE action defined.
+6. Any SET statement can be specified inside a trigger. The SET option selected remains in effect during the execution of the trigger and then reverts to its former setting.
+
+- Why Should You Use SQL Triggers?
+
+Using SQL triggers brings several benefits to the table:
+1. Automation: Triggers handle repetitive tasks, saving our time and effort.
+2. Consistency & Data Integrity: Automatically enforcing rules ensures that our data remains clean and accurate.
+3. Business Rules Enforcement: Triggers can help ensure that changes to our database follow your business logic.
+4. Audit Trails: Track changes automatically, making it easier to monitor and record data updates.
+
+- Real-World Use Cases of SQL Triggers?
+
+1. Automatically Updating Related Tables (DML Trigger Example)
+
+Triggers can automatically perform tasks, like updating related tables when data changes. Imagine we have a database for students, where the student_grades table holds individual subject grades. If the grade of a student is updated, we may also need to update the total_scores table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,166 @@
+Here's the **SQL Server** syntax for creating:
+
+* **DDL Triggers** (for `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`)
+* **DML Triggers** (for `INSERT`, `UPDATE`, `DELETE`)
+* **Logon Trigger**
+
+---
+
+## ✅ 1. DDL Trigger: CREATE, ALTER, DROP TABLE
+
+### Step 1: Create a log table
+
+```sql
+CREATE TABLE ddl_log (
+    EventType      NVARCHAR(100),
+    ObjectName     NVARCHAR(256),
+    ObjectType     NVARCHAR(100),
+    EventTime      DATETIME DEFAULT GETDATE(),
+    LoginName      NVARCHAR(100)
+);
+```
+
+### Step 2: Create the DDL trigger
+
+```sql
+CREATE TRIGGER trg_ddl_table_events
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @EventData XML = EVENTDATA();
+
+    INSERT INTO ddl_log (EventType, ObjectName, ObjectType, LoginName)
+    VALUES (
+        @EventData.value('(/EVENT_INSTANCE/EventType)[1]', 'NVARCHAR(100)'),
+        @EventData.value('(/EVENT_INSTANCE/ObjectName)[1]', 'NVARCHAR(256)'),
+        @EventData.value('(/EVENT_INSTANCE/ObjectType)[1]', 'NVARCHAR(100)'),
+        @EventData.value('(/EVENT_INSTANCE/LoginName)[1]', 'NVARCHAR(100)')
+    );
+END;
+```
+
+---
+
+## ✅ 2. DML Trigger: INSERT, UPDATE, DELETE
+
+### Step 1: Create a table to track employee activity
+
+```sql
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    name NVARCHAR(100),
+    position NVARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+
+INSERT INTO employees VALUES (1, 'Alice', 'Manager', 7000.00);
+```
+
+### Step 2: Create DML log table
+
+```sql
+CREATE TABLE dml_log (
+    ActionType   NVARCHAR(10),
+    EmpID        INT,
+    ActionTime   DATETIME DEFAULT GETDATE(),
+    PerformedBy  NVARCHAR(100)
+);
+```
+
+### Step 3: Create the triggers
+
+**Insert Trigger**
+
+```sql
+CREATE TRIGGER trg_employees_insert
+ON employees
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'INSERT', emp_id, SYSTEM_USER
+    FROM inserted;
+END;
+```
+
+**Update Trigger**
+
+```sql
+CREATE TRIGGER trg_employees_update
+ON employees
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'UPDATE', emp_id, SYSTEM_USER
+    FROM inserted;
+END;
+```
+
+**Delete Trigger**
+
+```sql
+CREATE TRIGGER trg_employees_delete
+ON employees
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'DELETE', emp_id, SYSTEM_USER
+    FROM deleted;
+END;
+```
+
+---
+
+## ✅ 3. Logon Trigger (on SQL Server Instance)
+
+> ⚠️ Requires server-level permissions
+
+### Step 1: Create a server-level log table
+
+```sql
+USE master;
+GO
+
+CREATE TABLE login_log (
+    LoginTime   DATETIME DEFAULT GETDATE(),
+    LoginName   NVARCHAR(100),
+    HostName    NVARCHAR(100),
+    AppName     NVARCHAR(100)
+);
+```
+
+### Step 2: Create the logon trigger
+
+```sql
+CREATE TRIGGER trg_logon
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    INSERT INTO master.dbo.login_log (LoginName, HostName, AppName)
+    VALUES (
+        ORIGINAL_LOGIN(),
+        HOST_NAME(),
+        APP_NAME()
+    );
+END;
+```
+
+---
+
+## ✅ Summary of Trigger Names
+
+| Trigger Type | Name                   | Level    |
+| ------------ | ---------------------- | -------- |
+| DDL          | `trg_ddl_table_events` | DATABASE |
+| DML          | `trg_employees_*`      | TABLE    |
+| Logon        | `trg_logon`            | SERVER   |
+
+---
+
+Let me know if you want a **test script** for inserting, altering, deleting data to trigger all of these!
