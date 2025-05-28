@@ -730,15 +730,25 @@ SELECT * FROM login_log ORDER BY LoginTime DESC;
 ## **References** 
 
 **1. SQL Stored Procedures for SQL Server/www.w3schools.com/** https://www.w3schools.com/sql/sql_stored_procedures.asp
+
 **2. SQL - Stored Procedures/www.tutorialspoint.com/** https://www.tutorialspoint.com/sql/sql-stored-procedures.htm
+
 **3. Stored procedures (Database Engine)/www.microsoft.com/** https://learn.microsoft.com/en-us/sql/relational-databases/stored-procedures/stored-procedures-database-engine?view=sql-server-ver17
+
 **4. Understanding Stored Procedures in SQL: Benefits & Creation!/www.simplilearn.com/** https://www.simplilearn.com/tutorials/sql-tutorial/stored-procedure-in-sql
+
 **5. CREATE TRIGGER (Transact-SQL)/learn.microsoft.com/** https://learn.microsoft.com/en-us/sql/t-sql/statements/create-trigger-transact-sql?view=sql-server-ver17
+
 **6. SQL Triggers/www.geeksforgeeks.org** https://www.geeksforgeeks.org/sql-trigger-student-database/
+
 **7. SQL Triggers: A Guide for Developers/www.datacamp.com/** https://www.datacamp.com/tutorial/sql-triggers
+
 **8. An overview of Logon triggers in SQL Server/www.sqlshack.com/** https://www.sqlshack.com/an-overview-of-logon-triggers-in-sql-server/
+
 **9. Database Level DDL Triggers on Tables/www.sqlshack.com/** https://www.sqlshack.com/database-level-ddl-trigger-over-the-table/
+
 **10. SQL Server Interview Question and answers-Triggers, Instead of triggers, after triggers, inserted and deleted tables?/www.dotnetinterviewquestions.in/** https://www.dotnetinterviewquestions.in/article_sql-server-interview-question-and-answers-triggers-instead-of-triggers-after-triggers-inserted-and-deleted-tables_128.html
+
 **11. Database Level DDL Triggers for Views, Procedures and Functions/www.sqlshack.com/** https://www.sqlshack.com/database-level-ddl-triggers-for-views-procedures-and-functions/
 
 
