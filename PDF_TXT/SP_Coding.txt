@@ -1,0 +1,22 @@
+- How to Create a Simple Stored Procedure in SQL?
+
+1. The basic syntax to create an SQL stored procedure is as follows:
+
+1.1. Creation Syntax
+```sql
+CREATE PROCEDURE procedure_name(parameter1 datatype, parameter2 datatype, ...)
+BEGIN
+   -- SQL statements to be executed
+END
+DELIMITER ;
+```
+
+NOTE: 
+- The CREATE PROCEDURE statement is used to create the procedure. We can define any number of input parameters as per the requirement.
+- The SQL statements that make up the procedure are placed between the BEGIN and END keywords.
+
+1.2. Execution Syntax
+
+```sql
+EXEC procedure_name;
+```
