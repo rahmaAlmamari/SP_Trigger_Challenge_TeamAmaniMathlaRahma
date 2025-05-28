@@ -532,6 +532,52 @@ Create database TriggerDB
 -- USE Database
 USE TriggerDB
 ```
+2. DDL Trigger: CREATE, ALTER, DROP TABLE:
+```sql
+-- Step 1: Create a log table
+
+CREATE TABLE ddl_log (
+    EventType      NVARCHAR(100),
+    ObjectName     NVARCHAR(256),
+    ObjectType     NVARCHAR(100),
+    EventTime      DATETIME DEFAULT GETDATE(),
+    LoginName      NVARCHAR(100)
+);
+
+-- Step 2: Create the DDL trigger
+
+CREATE TRIGGER trg_ddl_table_events
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @EventData XML = EVENTDATA();
+    INSERT INTO ddl_log (EventType, ObjectName, ObjectType, LoginName)
+    VALUES (
+        @EventData.value('(/EVENT_INSTANCE/EventType)[1]', 'NVARCHAR(100)'),
+        @EventData.value('(/EVENT_INSTANCE/ObjectName)[1]', 'NVARCHAR(256)'),
+        @EventData.value('(/EVENT_INSTANCE/ObjectType)[1]', 'NVARCHAR(100)'),
+        @EventData.value('(/EVENT_INSTANCE/LoginName)[1]', 'NVARCHAR(100)')
+    );
+END;
+
+-- Step 3: Create a table to track employee activity
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    name NVARCHAR(100),
+    position NVARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+
+INSERT INTO employees VALUES (1, 'Alice', 'Manager', 7000.00);
+
+-- Step 4: Check Execution of DDL Trigger
+
+select * from ddl_log;
+```
+![DDL Trigger Flow](./images/CheckExecutionOfDDLTrigger.png)
 
 
 
