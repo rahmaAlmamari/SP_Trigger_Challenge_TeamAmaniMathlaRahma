@@ -525,6 +525,16 @@ END;
 
 ### Apply Triggers in Practice 
 
+1. Create a real-life case database (Company):
+```sql
+-- Create database
+Create database TriggerDB
+-- USE Database
+USE TriggerDB
+```
+
+
+
 
 
 
