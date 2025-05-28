@@ -288,7 +288,7 @@ when specific table columns are updated.
 
 **1. DDL Triggers (Data Definition Language):** 
 
-- What is DDL Trigger Works?
+- What is DDL Trigger?
 
 The Data Definition Language (DDL) command events such as Create_table, 
 Create_view, drop_table, Drop_view, and Alter_table cause the DDL triggers 
@@ -333,6 +333,32 @@ BEGIN
    ROLLBACK;
 END;
 ```
+
+**2. DML Triggers (Data Manipulation Language):**
+
+- What is DML Trigger?
+
+DML triggers fire when we manipulate data with commands like INSERT, 
+UPDATE, or DELETE. These triggers are perfect for scenarios where we 
+need to validate data before it is inserted, log changes to a table, 
+or cascade updates across related tables.
+
+__Example: Prevent Unauthorized Updates__
+```sql
+CREATE TRIGGER prevent_update 
+ON students
+FOR UPDATE 
+AS 
+BEGIN 
+   PRINT 'You can not insert, update and delete this table i'; 
+   ROLLBACK; 
+END;
+```
+
+
+
+
+
 
 
 
