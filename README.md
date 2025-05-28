@@ -511,6 +511,20 @@ These run before the action (INSERT, UPDATE, DELETE) is executed.
 They’re great for data validation or modifying values before they are 
 committed to the database.
 
+### Triggers Syntax
+
+```sql
+create trigger [trigger_name] -- Name of the trigger
+[before | after]  -- Specify whether the trigger runs before or after the event
+{insert | update | delete}  -- Specify the event that activates the trigger
+on [table_name]   -- Specify the table on which the trigger is defined
+FOR EACH ROW --
+BEGIN
+END;
+```
+
+
+
 
 
 
