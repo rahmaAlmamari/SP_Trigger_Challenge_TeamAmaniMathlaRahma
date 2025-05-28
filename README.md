@@ -483,6 +483,36 @@ END;
 The trigger checks if the inserted grade is valid. If not, it throws an error 
 and prevents the insertion.
 
+### INSTEAD, BEFORE and AFTER Triggers
+
+**1. INSTEAD trigger:**
+
+Use to take alternative actions before the update happens.
+
+- Some of the uses of instead of trigger's are:
+1. Reject updates which are not valid.
+2. Take some alternative action if any error occurs.
+3. To implement cascading deletes. 
+
+**2. AFTER trigger:**
+
+Use to execute trigger logic after the data has been updated.
+
+- Some uses of after triggers are:
+1. For recording Audit trail where you want new and old values to be 
+inserted in to audit table.
+2. Updating values after the update has happened.
+
+![INSTEAD and AFTER Trigger Flow](./images/sql_Inseted_after_trigger.png)
+
+**3. BEFORE Triggers:**
+
+These run before the action (INSERT, UPDATE, DELETE) is executed. 
+They’re great for data validation or modifying values before they are 
+committed to the database.
+
+
+
 
 
 
