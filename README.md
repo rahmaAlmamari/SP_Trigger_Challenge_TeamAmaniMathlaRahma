@@ -284,4 +284,44 @@ tasks, ensure data consistency, and keep accurate records of database activities
 For example, a trigger can be invoked when a row is inserted into a specified table or 
 when specific table columns are updated.
 
+### Types of SQL triggers?
+
+**1. DDL Triggers (Data Definition Language):** 
+
+- What is DDL Trigger Works?
+
+The Data Definition Language (DDL) command events such as Create_table, 
+Create_view, drop_table, Drop_view, and Alter_table cause the DDL triggers 
+to be activated. They allow us to track changes in the structure of the database. 
+The trigger will prevent any table creation, alteration, or deletion in the database.
+
+- How DDL Trigger Works?
+
+Every DDL operation generates one Transaction in case of the DDL Trigger have been 
+applied at the Database or the Server level. The SQL Server generates the events with 
+relevant information in the same transaction following the operation. Prepare a metric 
+with extracting the DDL event function(EVENTDATA()) to wraps a policy or standards for 
+deployment.
+
+![DDL Trigger Flow](./images/how-ddl-trigger-works-over-database.png)
+
+The EVENTDATA() is an inbuilt function of the DDL trigger in SQL Server and 
+that would return exchange occasion subtleties with the number of the fields in XML format
+
+EventType (Create View, Alter View, Drop View, etc…)
+PostTime (Event trigger time)
+SPID (SQL Server session ID)
+ServerName (SQL Server instance name)
+LoginName (SQL Server Login name)
+UserName (username for login, by default dbo schema as username)
+DatabaseName (name of database where trigger was executed)
+SchemaName (schema name of the View)
+ObjectName (Name of the View)
+ObjectType (Object types. such as Table, view, procedure, etc…)
+TSQLCommand (Schema deployment Query which is executed by user)
+SetOptions (SET Option which are applied while Creating View or Modify it)
+CommandText (Create, Alter or Drop object command)
+
+
+
 
