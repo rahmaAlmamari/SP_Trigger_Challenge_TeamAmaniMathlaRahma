@@ -585,6 +585,95 @@ select * from ddl_log;
 
 **3. DML Trigger: INSERT, UPDATE, DELETE:**
 
+- Step 1: Create DML log table
+```sql
+CREATE TABLE dml_log (
+    ActionType   NVARCHAR(10),
+    EmpID        INT,
+    ActionTime   DATETIME DEFAULT GETDATE(),
+    PerformedBy  NVARCHAR(100)
+);
+```
+
+- Step 2: Create the triggers (Insert Trigger)
+```sql
+CREATE TRIGGER trg_employees_insert
+ON employees
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'INSERT', emp_id, SYSTEM_USER
+    FROM inserted;
+END;
+```
+
+- Step 3: Modifying the employee table to run the terigger MDL 
+```sql
+INSERT INTO employees VALUES (2, 'Ali', 'Manager', 9000.00);
+INSERT INTO employees VALUES (3, 'Mathla', 'Manager', 10000.00);
+```
+
+- Step 4: Check Execution of DML Trigger
+```sql
+select * from dml_log;
+```
+![DML - Insert Trigger Flow](./images/dml_insert.png)
+
+
+- Step 5: Create the triggers (Update Trigger)
+```sql
+CREATE TRIGGER trg_employees_update
+ON employees
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'UPDATE', emp_id, SYSTEM_USER
+    FROM inserted;
+END;
+```
+
+- Step 6: Modifying the employee table to run the terigger MDL 
+```sql
+Update employees set name = 'Rahma' where emp_id =2
+Update employees set name = 'Amani' where emp_id =1
+```
+
+- Step 7: Check Execution of DML Trigger
+```sql
+select * from dml_log;
+```
+![DML - Update Trigger Flow](./images/dml_update.png)
+
+ - Step 8: Create the triggers (Delete Trigger)
+```sql
+CREATE TRIGGER trg_employees_delete
+ON employees
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO dml_log (ActionType, EmpID, PerformedBy)
+    SELECT 'DELETE', emp_id, SYSTEM_USER
+    FROM deleted;
+END;
+```
+
+- Step 9: Modifying the employee table to run the terigger MDL 
+```sql
+delete from employees where emp_id =3
+```
+
+- Step 10: Check Execution of DML Trigger
+```sql
+select * from dml_log;
+```
+
+![DML - Delete Trigger Flow](./images/dml_delete.png)
+
+
+
+
 
 
 
